@@ -1,0 +1,27 @@
+Guía de Axe Mid
+
+- Salir con corona para armar meteor hammer
+Ejecutar en este orden:
+1. config service
+2. registry service
+3. admin service: 8086
+--En este punto debes entrar a localhost:8081 y logearte (root/s3cr3t)
+4. gateway service: 6969
+Luego se ejecutan los microservicios
+5. geographics service
+6. security service
+
+Eureka: 8099
+http://localhost:8099/eureka/ (para visualizar config de microservicios)
+
+Para terminar proceso en caso algún puerto esté siendo utilizado correr en cmd:
+netstat -ano|findstr "PID :8080" (cambiar 8080 por puerto)
+taskkill /PID 18264 /f (cambiar 18264 por proceso)
+
+NOTAS:
+usar config-data que esta en repo de github.
+usar microservicios security y geographics que están en repos de github
+
+ENDPOINTS de los 2 microservicios:
+localhost:6969/geographics/   (districts,departments,countries)
+localhost:6969/security/   (users, users/{id})
