@@ -10,6 +10,7 @@ Ejecutar en este orden:
 Luego se ejecutan los microservicios
 5. geographics service
 6. security service
+7. subnpay service
 
 Eureka: 8099
 http://localhost:8099/eureka/ (para visualizar config de microservicios)
@@ -25,3 +26,4 @@ usar microservicios security y geographics que están en repos de github
 ENDPOINTS de los 2 microservicios:
 localhost:6969/geographics/   (districts,departments,countries)
 localhost:6969/security/   (users, users/{id})
+localhost:6969/subnpay/   (subscriptions, paymentmethods)
