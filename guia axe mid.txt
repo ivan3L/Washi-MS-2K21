@@ -14,7 +14,7 @@ Luego se ejecutan los microservicios
 
 Eureka: 8099
 http://localhost:8099/eureka/ (para visualizar config de microservicios)
-
+http://localhost:8099 <- Eureka
 Para terminar proceso en caso algún puerto esté siendo utilizado correr en cmd:
 netstat -ano|findstr "PID :8080" (cambiar 8080 por puerto)
 taskkill /PID 18264 /f (cambiar 18264 por proceso)
