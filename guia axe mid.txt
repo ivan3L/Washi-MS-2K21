@@ -27,3 +27,12 @@ ENDPOINTS de los 2 microservicios:
 localhost:6969/geographics/   (districts,departments,countries)
 localhost:6969/security/   (users, users/{id})
 localhost:6969/subnpay/   (subscriptions, paymentmethods)
+
+Swaggers:
+Geographics:
+localhost:8090/v2/api-docs
+http://localhost:8090/swagger-ui.html
+
+Security:
+localhost:8909/v2/api-docs
+http://localhost:8909/swagger-ui.html
