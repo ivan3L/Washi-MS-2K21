@@ -5,6 +5,7 @@ import com.washi.geographicsservice.entity.District;
 import com.washi.geographicsservice.service.DistrictService;
 import com.washi.geographicsservice.service.DistrictService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class DistrictController{
     DistrictService districtService;
 
     @GetMapping
+    @ApiOperation(value = "Retorna una lista distritos")
     public ResponseEntity<List<District>> listAllDistricts(@RequestParam(name = "DepartmentId" , required = false) Long DepartmentId ) {
         List<District> districts =  new ArrayList<>();
         if (null ==  DepartmentId) {
@@ -43,6 +45,7 @@ public class DistrictController{
     }
 
     @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Retorna un distrito según su id")
     public ResponseEntity<District> getDistrict(@PathVariable("id") Long id) {
         District district =  districtService.getDistrict(id);
         if (null==district){

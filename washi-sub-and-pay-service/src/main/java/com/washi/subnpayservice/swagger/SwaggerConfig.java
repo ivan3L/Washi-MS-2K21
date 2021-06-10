@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .tags(new Tag("Security", "Security Microservice"))
+                .tags(new Tag("Subnpay", "Controla todos los metodos de pago"))
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())

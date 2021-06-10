@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .tags(new Tag("Geographics", "Geographics"))
+                .tags(new Tag("Geographics", "Maneja y provee las ubicaciones necesarias para la app"))
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())

@@ -6,6 +6,8 @@ import com.washi.subnpayservice.entity.Subscription;
 import com.washi.subnpayservice.model.User;
 import com.washi.subnpayservice.service.SubscriptionService;
 //import io.swagger.annotations.Api;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,12 +24,13 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/subnpay/subscriptions")
-//@Api(tags = "Subnpay")
+@Api(tags = "Subnpay")
 public class SubscriptionController {
     @Autowired
     SubscriptionService subscriptionService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Borra un usuario")
     public ResponseEntity<List<Subscription>> fetchAll() {
         try {
             List<Subscription> subscriptions = subscriptionService.findAll();

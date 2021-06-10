@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.washi.securityservice.entity.User;
 import com.washi.securityservice.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping
+    @ApiOperation(value = "Retorna una lista de todos los usuarios")
     public ResponseEntity<List<User>> listAllUsers(){
         List<User> users = new ArrayList<>();
         users = userService.findAll();
@@ -39,6 +41,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Retorna un usuario según su id")
     public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
         log.info("Fetching User with id {}", id);
         User user =  userService.getUser(id);
@@ -50,6 +53,7 @@ public class UserController {
     }
 
     @PostMapping
+    @ApiOperation(value = "Crea un nuevo usuario")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user, BindingResult result) {
         log.info("Creating User : {}", user);
         if (result.hasErrors()){
@@ -61,6 +65,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
+    @ApiOperation(value = "Modifica un usuario existente")
     public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
         log.info("Updating User with id {}", id);
 
@@ -75,6 +80,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Borra un usuario")
     public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
         log.info("Fetching & Deleting User with id {}", id);
 

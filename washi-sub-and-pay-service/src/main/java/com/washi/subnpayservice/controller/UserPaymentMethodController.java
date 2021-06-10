@@ -6,6 +6,7 @@ import com.washi.subnpayservice.entity.UserPaymentMethod;
 import com.washi.subnpayservice.model.User;
 import com.washi.subnpayservice.service.UserPaymentMethodService;
 //import io.swagger.annotations.Api;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/subnpay/paymentmethods")
-//@Api(tags = "Subnpay")
+@Api(tags = "Subnpay")
 public class UserPaymentMethodController {
     @Autowired
     UserPaymentMethodService userPaymentMethodService;
