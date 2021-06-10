@@ -36,3 +36,7 @@ http://localhost:8090/swagger-ui.html
 Security:
 localhost:8909/v2/api-docs
 http://localhost:8909/swagger-ui.html
+
+Subnpay:
+localhost:8399/v2/api-docs
+http://localhost:8399/swagger-ui.html
