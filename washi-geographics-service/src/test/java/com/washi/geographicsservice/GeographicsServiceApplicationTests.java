@@ -17,9 +17,6 @@ import java.util.List;
 class GeographicsServiceApplicationTests {
 
     @Autowired
-    private DistrictService districtService;
-
-    @Autowired
     private WebClient.Builder webClientBuilder;
 
     @Test

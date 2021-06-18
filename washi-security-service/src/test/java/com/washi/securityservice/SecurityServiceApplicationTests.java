@@ -77,7 +77,7 @@ class SecurityServiceApplicationTests {
 
     @Test
     void deleteUser() {
-        long idL = 13;
+        long idL = 10;
         String id = String.valueOf(idL);
         User user = webClientBuilder.build()
                 .delete()

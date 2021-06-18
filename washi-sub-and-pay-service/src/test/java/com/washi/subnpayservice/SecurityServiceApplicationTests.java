@@ -2,6 +2,7 @@ package com.washi.subnpayservice;
 
 import com.washi.subnpayservice.entity.Subscription;
 import com.washi.subnpayservice.entity.UserPaymentMethod;
+import com.washi.subnpayservice.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -85,6 +86,10 @@ class SecurityServiceApplicationTests {
     @Test
     void newSubscription() {
         Subscription subscription = new Subscription();
+        User user = new User();
+        user.setId(15L);
+        subscription.setUser();
+        subscription.setPlanId(2L);
         Subscription subscriptionResponse = webClientBuilder.build()
                 .post()
                 .uri("http://localhost:8399/subnpay/subscriptions")
