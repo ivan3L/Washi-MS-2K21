@@ -9,12 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 public class GeographicsServiceApplication {
-
-    @Bean
-    public WebClient.Builder getWebClientBuilder(){
-        return WebClient.builder();
-    }
-
+    
     public static void main(String[] args) {
         SpringApplication.run(GeographicsServiceApplication.class, args);
     }
