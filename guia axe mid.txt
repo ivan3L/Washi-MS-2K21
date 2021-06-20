@@ -11,6 +11,7 @@ Luego se ejecutan los microservicios
 5. geographics service
 6. security service
 7. subnpay service
+8. business service
 
 Eureka: 8099
 http://localhost:8099/eureka/ (para visualizar config de microservicios)
@@ -40,3 +41,7 @@ http://localhost:8909/swagger-ui.html
 Subnpay:
 localhost:8399/v2/api-docs
 http://localhost:8399/swagger-ui.html
+
+Business:
+localhost:8979/v2/api-docs
+http://localhost:8979/swagger-ui.html
