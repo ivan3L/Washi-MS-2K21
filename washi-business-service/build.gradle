@@ -41,6 +41,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    testCompile 'io.cucumber:cucumber-java8:6.10.4'
+    testCompile 'io.cucumber:cucumber-junit:6.10.4'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
