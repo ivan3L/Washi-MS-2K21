@@ -9,7 +9,7 @@ public interface OrderService {
     public List<Order> findAll();
     public Order createOrder(Order order);
     public Order updateOrder(Order order);
-    public ResponseEntity<Object> deleteOrder(Long orderId);
+    public Order deleteOrder(Order order);
     public Order getOrder(Long id);
 
 }

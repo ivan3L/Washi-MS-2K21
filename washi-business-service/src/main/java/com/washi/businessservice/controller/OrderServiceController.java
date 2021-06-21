@@ -76,8 +76,10 @@ public class OrderServiceController {
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Borra una orden")
-    public ResponseEntity<?> deleteOrder(@PathVariable("id") long id) {
-        return orderService.deleteOrder(id);
+    public ResponseEntity<Order> deleteOrder(@PathVariable("id") long id) {
+        Order order = orderService.getOrder(id);
+        order = orderService.deleteOrder(order);
+        return ResponseEntity.ok(order);
     }
 
     private String formatMessage( BindingResult result){

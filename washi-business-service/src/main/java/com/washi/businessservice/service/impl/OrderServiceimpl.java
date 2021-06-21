@@ -43,11 +43,9 @@ public class OrderServiceimpl implements OrderService {
         return orderRepository.save(orderDB);
     }
     @Override
-    public ResponseEntity<Object> deleteOrder(Long orderId){
-        return orderRepository.findById(orderId).map(orderDB -> {
-            orderRepository.delete(orderDB);
-            return ResponseEntity.ok().build();
-        }).orElseThrow(()-> new ResourceNotFoundException("Order", "id", orderId));
+    public Order deleteOrder(Order order){
+        Order orderDB = getOrder(order.getId());
+        return  orderRepository.save(order);
     }
     @Override
     public Order getOrder(Long id){
