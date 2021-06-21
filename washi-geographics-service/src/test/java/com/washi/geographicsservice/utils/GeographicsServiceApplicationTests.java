@@ -1,4 +1,4 @@
-package com.washi.geographicsservice;
+package com.washi.geographicsservice.utils;
 
 import com.washi.geographicsservice.entity.Country;
 import com.washi.geographicsservice.entity.Department;
