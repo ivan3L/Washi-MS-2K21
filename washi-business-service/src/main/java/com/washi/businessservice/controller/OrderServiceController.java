@@ -6,6 +6,7 @@ import com.washi.businessservice.entity.LaundryServiceMaterial;
 import com.washi.businessservice.entity.Order;
 import com.washi.businessservice.service.impl.OrderService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class OrderServiceController {
     OrderService orderService;
 
     @GetMapping
+    @ApiOperation(value = "Retorna una lista de todas las ordenes")
     public ResponseEntity<List<Order>> listAllOrder(){
         List<Order> order = new ArrayList<>();
         order = orderService.findAll();
@@ -41,6 +43,7 @@ public class OrderServiceController {
         return ResponseEntity.ok(order);
     }
     @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Retorna una determinada orden segun el id")
     public ResponseEntity<Order> getOrder(@PathVariable("id")Long id){
         Order order = orderService.getOrder(id);
         if(order == null){
@@ -50,6 +53,7 @@ public class OrderServiceController {
     }
 
     @PostMapping
+    @ApiOperation(value = "Crea una orden")
     public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order, BindingResult result){
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
@@ -58,6 +62,7 @@ public class OrderServiceController {
         return  ResponseEntity.status( HttpStatus.CREATED).body(orderDB);
     }
     @PutMapping(value = "/{id}")
+    @ApiOperation(value = "Edita una orden")
     public ResponseEntity<?> updateOrder(@PathVariable("id") long id, @RequestBody Order order) {
 
         order.setId(id);
@@ -70,6 +75,7 @@ public class OrderServiceController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Borra una orden")
     public ResponseEntity<?> deleteOrder(@PathVariable("id") long id) {
         return orderService.deleteOrder(id);
     }

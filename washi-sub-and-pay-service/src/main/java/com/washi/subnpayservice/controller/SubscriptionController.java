@@ -30,7 +30,7 @@ public class SubscriptionController {
     SubscriptionService subscriptionService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Borra un usuario")
+    @ApiOperation(value = "Retorna una lista de las subscripciones de todos los usuarios")
     public ResponseEntity<List<Subscription>> fetchAll() {
         try {
             List<Subscription> subscriptions = subscriptionService.findAll();
@@ -41,6 +41,7 @@ public class SubscriptionController {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Retorna una subscripción de un usuario segun su id")
     public ResponseEntity<Subscription> fetchById(@PathVariable("id") Long id) {
         try {
             Optional<Subscription> optionalSubscription = subscriptionService.findById(id);
@@ -69,6 +70,7 @@ public class SubscriptionController {
     }
     */
     @PostMapping
+    @ApiOperation(value = "Crea una subcripción")
     public ResponseEntity<Subscription> createSubscription(@Valid @RequestBody Subscription subscription, BindingResult result) {
         log.info("Creating Subscription : {}", subscription);
         if (result.hasErrors()){
@@ -80,6 +82,7 @@ public class SubscriptionController {
     }
 
     @PutMapping(value = "/{id}")
+    @ApiOperation(value = "Edita una subcripción")
     public ResponseEntity<?> updateSubscription(@PathVariable("id") long id, @RequestBody Subscription subscription) {
         log.info("Updating Subscription with id {}", id);
 

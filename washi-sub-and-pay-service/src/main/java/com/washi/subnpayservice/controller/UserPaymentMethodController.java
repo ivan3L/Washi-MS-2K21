@@ -7,6 +7,7 @@ import com.washi.subnpayservice.model.User;
 import com.washi.subnpayservice.service.UserPaymentMethodService;
 //import io.swagger.annotations.Api;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class UserPaymentMethodController {
     UserPaymentMethodService userPaymentMethodService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Retorna una lista de todos los metodos de pagos de los usuarios")
     public ResponseEntity<List<UserPaymentMethod>> fetchAll() {
         try {
             List<UserPaymentMethod> userPaymentMethods = userPaymentMethodService.findAll();
@@ -39,6 +41,7 @@ public class UserPaymentMethodController {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Retorna los metodos de pagos de un usuario segun su id")
     public ResponseEntity<UserPaymentMethod> fetchById(@PathVariable("id") Long id) {
         try {
             Optional<UserPaymentMethod> optionalUserPaymentMethod = userPaymentMethodService.findById(id);
@@ -67,6 +70,7 @@ public class UserPaymentMethodController {
     }
     */
     @PostMapping
+    @ApiOperation(value = "Crea un metodo de pago para un usuario")
     public ResponseEntity<UserPaymentMethod> createUserPaymentMethod(@Valid @RequestBody UserPaymentMethod userPaymentMethod, BindingResult result) {
         log.info("Creating UserPaymentMethod : {}", userPaymentMethod);
         if (result.hasErrors()){
@@ -78,6 +82,7 @@ public class UserPaymentMethodController {
     }
 
     @PutMapping(value = "/{id}")
+    @ApiOperation(value = "Edita un metodo de pago de un usuario")
     public ResponseEntity<?> updateUserPaymentMethod(@PathVariable("id") long id, @RequestBody UserPaymentMethod userPaymentMethod) {
         log.info("Updating UserPaymentMethod with id {}", id);
 

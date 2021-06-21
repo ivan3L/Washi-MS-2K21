@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.washi.businessservice.entity.LaundryServiceMaterial;
 import com.washi.businessservice.service.impl.LaundryServiceMaterialService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class LaundryServiceMaterialController {
     LaundryServiceMaterialService laundryServiceMaterialService;
 
     @GetMapping
+    @ApiOperation(value = "Retorna una lista de todas las lavanderias")
     public ResponseEntity<List<LaundryServiceMaterial>> listAllLaundryServiceMaterial(){
         List<LaundryServiceMaterial> laundryServiceMaterials = new ArrayList<>();
         laundryServiceMaterials = laundryServiceMaterialService.findAll();
@@ -39,6 +41,7 @@ public class LaundryServiceMaterialController {
     }
 
     @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Retorna una lavanderia de un determinado id")
     public ResponseEntity<LaundryServiceMaterial> getLaundryServiceMaterial(@PathVariable("id") Long id) {
         log.info("Fetching User with id {}", id);
         LaundryServiceMaterial laundryServiceMaterial =  laundryServiceMaterialService.getLaundryServiceMaterial(id);
@@ -50,6 +53,7 @@ public class LaundryServiceMaterialController {
     }
 
     @PostMapping
+    @ApiOperation(value = "Crea una lavanderia")
     public ResponseEntity<LaundryServiceMaterial> createLaundryServiceMaterial(@Valid @RequestBody LaundryServiceMaterial laundryServiceMaterial, BindingResult result) {
         log.info("Creating User : {}", laundryServiceMaterial);
         if (result.hasErrors()){
@@ -61,6 +65,7 @@ public class LaundryServiceMaterialController {
     }
 
     @PutMapping(value = "/{id}")
+    @ApiOperation(value = "Edita una lavanderia")
     public ResponseEntity<?> updateLaundryServiceMaterial(@PathVariable("id") long id, @RequestBody LaundryServiceMaterial laundryServiceMaterial) {
         log.info("Updating User with id {}", id);
 
@@ -75,6 +80,7 @@ public class LaundryServiceMaterialController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Elimina una lavanderia")
     public ResponseEntity<LaundryServiceMaterial> deleteLaundryServiceMaterial(@PathVariable("id") long id) {
         log.info("Fetching & Deleting User with id {}", id);
 
