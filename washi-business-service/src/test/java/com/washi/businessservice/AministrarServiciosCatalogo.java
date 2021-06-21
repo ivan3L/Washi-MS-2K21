@@ -13,7 +13,7 @@ public class AministrarServiciosCatalogo {
     @Autowired
     private WebClient.Builder webClientBuilder;
 
-    LaundryServiceMaterial laundryServiceMaterial;
+    LaundryServiceMaterial laundryServiceMaterial = new LaundryServiceMaterial();
     User user;
 
     // Scenario: El dueño de la lavandería quiere agregar un servicio
@@ -33,6 +33,7 @@ public class AministrarServiciosCatalogo {
     }
 
     private void whenEligeElServicioYAgrega() {
+        laundryServiceMaterial.setUser(user);
         LaundryServiceMaterial laundryServiceMaterialResponse = webClientBuilder.build()
                 .post()
                 .uri("http://localhost:8979/business/laundry")
@@ -66,6 +67,7 @@ public class AministrarServiciosCatalogo {
     private void whenEligeElServicioYBorra() {
         long idL = 1;
         String id = String.valueOf(idL);
+        laundryServiceMaterial.setUser(user);
         LaundryServiceMaterial laundryServiceMaterialResponse = webClientBuilder.build()
                 .delete()
                 .uri("http://localhost:8979/business/laundry/"+id)
@@ -97,6 +99,7 @@ public class AministrarServiciosCatalogo {
     private void whenEligeElServicioYEdita() {
         long idL = 1;
         String id = String.valueOf(idL);
+        laundryServiceMaterial.setUser(user);
         LaundryServiceMaterial laundryServiceMaterialResponse = webClientBuilder.build()
                 .put()
                 .uri("http://localhost:8979/business/laundry/"+id)
