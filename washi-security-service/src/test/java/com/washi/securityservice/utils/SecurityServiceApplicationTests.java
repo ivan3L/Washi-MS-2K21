@@ -1,4 +1,4 @@
-package com.washi.securityservice;
+package com.washi.securityservice.utils;
 
 import com.washi.securityservice.entity.User;
 import org.junit.jupiter.api.Test;
