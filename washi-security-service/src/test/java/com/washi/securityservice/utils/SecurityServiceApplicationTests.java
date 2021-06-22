@@ -58,7 +58,7 @@ class SecurityServiceApplicationTests {
 
     @Test
     void updateUser() {
-        long idL = 10;
+        long idL = 1;
         String id = String.valueOf(idL);
         User user = new User();
         user.setEmail("pruebatesting@gmail.com");
@@ -77,7 +77,7 @@ class SecurityServiceApplicationTests {
 
     @Test
     void deleteUser() {
-        long idL = 10;
+        long idL = 1;
         String id = String.valueOf(idL);
         User user = webClientBuilder.build()
                 .delete()
