@@ -1,4 +1,4 @@
-package com.washi.subnpayservice;
+package com.washi.subnpayservice.utils;
 
 import com.washi.subnpayservice.entity.Subscription;
 import com.washi.subnpayservice.entity.UserPaymentMethod;
@@ -86,9 +86,8 @@ class SecurityServiceApplicationTests {
     @Test
     void newSubscription() {
         Subscription subscription = new Subscription();
-        User user = new User();
-        user.setId(15L);
-        subscription.setUser();
+        User user = User.builder().name("Felipe").build();
+        subscription.setUser(user);
         subscription.setPlanId(2L);
         Subscription subscriptionResponse = webClientBuilder.build()
                 .post()
