@@ -11,6 +11,9 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "number_subscription")
+    private String numberSubscription;
+
     @Transient
     private User user;
 
@@ -22,4 +25,6 @@ public class Subscription {
 
     @Column(name = "plan_id")
     private Long planId;
+
+    private String state;
 }

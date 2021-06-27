@@ -11,6 +11,9 @@ public class UserPaymentMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "number_user_payment_method")
+    private String numberUserPaymentMethod;
+
     @Transient
     private User user;
 
@@ -22,4 +25,6 @@ public class UserPaymentMethod {
 
     @Column(name = "payment_method_id")
     private Long paymentMethodId;
+
+    private String state;
 }

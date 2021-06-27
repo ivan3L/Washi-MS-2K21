@@ -3,7 +3,6 @@ package com.washi.subnpayservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.washi.subnpayservice.entity.Subscription;
-import com.washi.subnpayservice.model.User;
 import com.washi.subnpayservice.service.SubscriptionService;
 //import io.swagger.annotations.Api;
 import io.swagger.annotations.Api;
@@ -24,65 +23,48 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/subnpay/subscriptions")
-@Api(tags = "Subnpay")
+@Api(tags = "Security")
 public class SubscriptionController {
     @Autowired
     SubscriptionService subscriptionService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Retorna una lista de las subscripciones de todos los usuarios")
-    public ResponseEntity<List<Subscription>> fetchAll() {
-        try {
-            List<Subscription> subscriptions = subscriptionService.findAll();
-            return new ResponseEntity<List<Subscription>>(subscriptions, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @GetMapping
+    @ApiOperation(value = "Retorna una lista de todos los suscripcions")
+    public ResponseEntity<List<Subscription>> listAllSubscriptions(){
+        List<Subscription> subscriptions = new ArrayList<>();
+        subscriptions = subscriptionService.findAll();
+        if(subscriptions.isEmpty()){
+            return ResponseEntity.noContent().build();
         }
+        return ResponseEntity.ok(subscriptions);
     }
 
-    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Retorna una subscripción de un usuario segun su id")
-    public ResponseEntity<Subscription> fetchById(@PathVariable("id") Long id) {
-        try {
-            Optional<Subscription> optionalSubscription = subscriptionService.findById(id);
-            if(optionalSubscription.isPresent()) {
-                return new ResponseEntity<Subscription>(optionalSubscription.get(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch( Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Retorna un suscripcion según su id")
+    public ResponseEntity<Subscription> getSubscription(@PathVariable("id") Long id) {
+        log.info("Fetching Subscription with id {}", id);
+        Subscription subscription =  subscriptionService.getSubscription(id);
+        if (null==subscription){
+            log.error("Subscription with id {} not found.", id);
+            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(subscription);
     }
-    /*
-    @GetMapping(path = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Subscription> fetchByUserId(@PathVariable("userId") String userId) {
-        try {
-            List<Optional<Subscription>> optionalSubscription = subscriptionService.findByUserId(userId);
-            if(optionalSubscription != null) {
-                return ResponseEntity.ok(optionalSubscription.zdzdvvadsvad);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch( Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    */
+
     @PostMapping
-    @ApiOperation(value = "Crea una subcripción")
+    @ApiOperation(value = "Crea un nuevo suscripcion")
     public ResponseEntity<Subscription> createSubscription(@Valid @RequestBody Subscription subscription, BindingResult result) {
         log.info("Creating Subscription : {}", subscription);
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Subscription subscriptionDB = subscriptionService.createSubscription(subscription);
+        Subscription subscriptionDB = subscriptionService.createSubscription (subscription);
 
         return  ResponseEntity.status( HttpStatus.CREATED).body(subscriptionDB);
     }
 
     @PutMapping(value = "/{id}")
-    @ApiOperation(value = "Edita una subcripción")
+    @ApiOperation(value = "Modifica un suscripcion existente")
     public ResponseEntity<?> updateSubscription(@PathVariable("id") long id, @RequestBody Subscription subscription) {
         log.info("Updating Subscription with id {}", id);
 
@@ -95,19 +77,21 @@ public class SubscriptionController {
         }
         return  ResponseEntity.ok(currentSubscription);
     }
-    /*
-        @DeleteMapping(value = "/{id}")
-        public ResponseEntity<Subscription> deleteSubscription(@PathVariable("id") Long id) {
-            log.info("Fetching & Deleting Subscription with id {}", id);
-            Optional<Subscription> optionalSubscription = subscriptionService.findById(id.toString());
-            if (null == user) {
-                log.error("Unable to delete User with id {} not found.", id);
-                return  ResponseEntity.notFound().build();
-            }
-            user = userService.deleteUser(user);
-            return ResponseEntity.ok(user);
+
+    @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Borra un suscripcion")
+    public ResponseEntity<Subscription> deleteSubscription(@PathVariable("id") long id) {
+        log.info("Fetching & Deleting Subscription with id {}", id);
+
+        Subscription subscription = subscriptionService.getSubscription(id);
+        if (null == subscription) {
+            log.error("Unable to delete Subscription with id {} not found.", id);
+            return  ResponseEntity.notFound().build();
         }
-    */
+        subscription = subscriptionService.deleteSubscription(subscription);
+        return ResponseEntity.ok(subscription);
+    }
+
     private String formatMessage( BindingResult result){
         List<Map<String,String>> errors = result.getFieldErrors().stream()
                 .map(err ->{

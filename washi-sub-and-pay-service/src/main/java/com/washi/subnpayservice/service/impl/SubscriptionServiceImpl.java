@@ -6,6 +6,7 @@ import com.washi.subnpayservice.entity.Subscription;
 import com.washi.subnpayservice.model.User;
 import com.washi.subnpayservice.repository.PlanRepository;
 import com.washi.subnpayservice.repository.SubscriptionRepository;
+import com.washi.subnpayservice.service.PlanService;
 import com.washi.subnpayservice.service.SubscriptionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,46 +29,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     UserClient userClient;
 
     @Override
-    public Subscription save(Subscription entity) throws Exception {
-        return null;
-    }
-
-    @Override
     public List<Subscription> findAll() {
         return subscriptionRepository.findAll();
     }
 
     @Override
-    public List<Optional<Subscription>> findByUserId(String userId) throws Exception {
-        return subscriptionRepository.findByUserId(userId);
-    }
-
-    @Override
-    public List<Optional<Subscription>> findByPlanId(String planId) throws Exception {
-        return subscriptionRepository.findByPlanId(planId);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public Optional<Subscription> findById(Long aLong) throws Exception {
-        return subscriptionRepository.findById( aLong);
-    }
-
-    @Override
-    public Subscription update(Subscription entity) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Long aLong) throws Exception {
-    }
-
-    @Override
     public Subscription createSubscription(Subscription subscription) {
-        Subscription subscriptionDB = subscriptionRepository.findById(subscription.getId().toString());
+        Subscription subscriptionDB = subscriptionRepository.findByNumberSubscription(subscription.getNumberSubscription());
         if(subscriptionDB != null){
             return subscriptionDB;
         }
+        subscription.setState("CREATED");
         subscriptionDB = subscriptionRepository.save(subscription);
 
         return subscriptionDB;
@@ -79,8 +51,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         if(subscriptionDB == null){
             return null;
         }
-        subscriptionDB.setPlanId(subscription.getPlanId());
         subscriptionDB.setUserId(subscription.getUserId());
+        subscriptionDB.setNumberSubscription(subscription.getNumberSubscription());
+        subscriptionDB.setPlanId(subscription.getPlanId());
 
         return subscriptionRepository.save(subscriptionDB);
     }
@@ -91,21 +64,16 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         if(subscriptionDB == null){
             return null;
         }
+        subscriptionDB.setState("DELETED");
         return subscriptionRepository.save(subscriptionDB);
     }
-/*
+
     @Override
-    public Optional<Subscription> findByIdOptional(String id) throws Exception {
-        return subscriptionRepository.findByIdOptional(id);
-    }
-*/
     public Subscription getSubscription(Long id) {
         Subscription subscription = subscriptionRepository.findById(id).orElse(null);
         if (subscription != null){
             User user = userClient.getUser(subscription.getUserId()).getBody();
             subscription.setUser(user);
-            Plan plan = planRepository.getById(subscription.getPlanId().toString());
-            subscription.setPlan(plan);
         }
         return subscription;
     }

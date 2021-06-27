@@ -20,44 +20,44 @@ VALUES(7, 'Lavandería Plus Anual', 1000, 365);
 INSERT INTO plans (id, name, price, duration_in_days)
 VALUES(8, 'Lavandería Gold Anual', 2000, 365);
 
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(1, 1, 1);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(2, 2, 1);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(3, 3, 1);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(4, 4, 1);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(5, 5, 1);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(6, 6, 2);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(7, 7, 2);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(8, 8, 2);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(9, 9, 2);
-INSERT INTO user_payment_methods (id, user_id, payment_method_id)
-VALUES(10, 10, 2);
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(1, '0001', 1, 1, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(2, '0002', 2, 1, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(3, '0003', 3, 1, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(4, '0004', 4, 1, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(5, '0005', 5, 1, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(6, '0006', 6, 2, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(7, '0007', 7, 2, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(8, '0008', 8, 2, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(9, '0009', 9, 2, 'CREATED');
+INSERT INTO user_payment_methods (id, number_user_payment_method, user_id, payment_method_id, state)
+VALUES(10, '0010', 10, 2, 'CREATED');
 
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(1, 1, 1);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(2, 2, 2);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(3, 3, 3);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(4, 4, 4);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(5, 5, 5);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(6, 6, 6);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(7, 7, 7);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(8, 8, 8);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(9, 9, 4);
-INSERT INTO subscriptions (id, user_id, plan_id)
-VALUES(10, 10, 8);
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(1, '0001', 1, 1, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(2, '0002', 2, 2, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(3, '0003', 3, 3, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(4, '0004', 4, 4, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(5, '0005', 5, 5, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(6, '0006', 6, 6, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(7, '0007', 7, 7, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(8, '0008', 8, 8, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(9, '0009', 9, 4, 'CREATED');
+INSERT INTO subscriptions (id, number_subscription, user_id, plan_id, state)
+VALUES(10, '0010', 10, 8, 'CREATED');
