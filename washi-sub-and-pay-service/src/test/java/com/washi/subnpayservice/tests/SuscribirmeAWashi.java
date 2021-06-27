@@ -1,4 +1,5 @@
-package com.washi.subnpayservice;
+
+package com.washi.subnpayservice.tests;
 
 import com.washi.subnpayservice.entity.Subscription;
 import com.washi.subnpayservice.model.User;
@@ -7,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 public class SuscribirmeAWashi {
     @Autowired
     private WebClient.Builder webClientBuilder;
 
     Subscription subscription = new Subscription();
+    List<Subscription> subscriptions = new ArrayList<>();
     User user;
 
     // Scenario : El washer desea visualizar sus planes de suscripción de la aplicación
@@ -34,10 +39,18 @@ public class SuscribirmeAWashi {
     }
 
     private void whenEscogeSuListaDeSuscripciones() {
+        List<Subscription> subscriptionsResponse = webClientBuilder.build()
+                .get()
+                .uri("http://localhost:8399/subnpay/subscriptions")
+                .retrieve()
+                .bodyToFlux(Subscription.class)
+                .collectList()
+                .block();
+        subscriptions = subscriptionsResponse;
     }
 
     private void thenVisualizaCorrectamente() {
-        System.out.println(subscription);
+        System.out.println(subscriptions);
     }
 
     //Scenario: El washer desea ingresar una nuevo plan de suscripción a Washi
@@ -60,6 +73,15 @@ public class SuscribirmeAWashi {
     }
 
     private void whenLlenaLaNuevaInformacion() {
+        subscription.setUser(user);
+        Subscription subscriptionResponse = webClientBuilder.build()
+                .post()
+                .uri("http://localhost:8399/subnpay/subscriptions")
+                .bodyValue(subscription)
+                .retrieve()
+                .bodyToMono(Subscription.class)
+                .block();
+        subscription = subscriptionResponse;
     }
 
     private void thenSeSuscribeCorrectamente() {
@@ -85,34 +107,22 @@ public class SuscribirmeAWashi {
     }
 
     private void whenActualiaSuscripcion() {
+        long idL = 1;
+        String id = String.valueOf(idL);
+        subscription.setUser(user);
+        Subscription subscriptionResponse = webClientBuilder.build()
+                .put()
+                .uri("http://localhost:8399/subnpay/subscriptions/"+id)
+                .bodyValue(subscription)
+                .retrieve()
+                .bodyToMono(Subscription.class)
+                .block();
+        subscription = subscriptionResponse;
     }
 
     private void thenSeActualizaSuSuscripcion() {
         System.out.println(subscription);
     }
 
-    //Scenario: El washer desea eliminar uno de sus planes de suscripción
-    @Test
-    void eliminarSuscripcion() {
-        //Given: El washer desea eliminar suscripción
-        givenDeseaEliminarSuscripcion();
 
-        //When:  Selecciona plan a eliminar
-        whenSeleccionaPlanAEliminar();
-
-        //Then: Se elimina correctamente
-        thenSeEliminaCorrectamente();
-    }
-
-    private void givenDeseaEliminarSuscripcion() {
-        user = User.builder().name("Felipe").build();
-        System.out.println(user);
-    }
-
-    private void whenSeleccionaPlanAEliminar() {
-    }
-
-    private void thenSeEliminaCorrectamente() {
-        System.out.println(subscription);
-    }
 }

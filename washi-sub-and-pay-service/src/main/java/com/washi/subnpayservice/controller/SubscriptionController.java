@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/subnpay/subscriptions")
-@Api(tags = "Security")
+@Api(tags = "Subnpay")
 public class SubscriptionController {
     @Autowired
     SubscriptionService subscriptionService;

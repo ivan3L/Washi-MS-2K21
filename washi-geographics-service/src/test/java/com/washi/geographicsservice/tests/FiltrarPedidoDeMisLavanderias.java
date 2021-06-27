@@ -1,4 +1,4 @@
-package com.washi.geographicsservice;
+package com.washi.geographicsservice.tests;
 
 import com.washi.geographicsservice.entity.Country;
 import com.washi.geographicsservice.entity.Department;
@@ -11,12 +11,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.List;
 
 @SpringBootTest
-public class FiltrarCatalogoDeLavanderias {
+public class FiltrarPedidoDeMisLavanderias {
     @Autowired
     private WebClient.Builder webClientBuilder;
     District district = new District();
 
-    // Scenario: El washer desea filtrar las lavanderias por distrito
+    // Scenario: El washer desea filtrar los pedidos realizados por distrito
     @Test
     void filtrarLavanderiasPorDistrito(){
         // Given: El washer desea filtrar por distrito

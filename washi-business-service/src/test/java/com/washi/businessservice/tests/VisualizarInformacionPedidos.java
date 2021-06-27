@@ -1,4 +1,4 @@
-package com.washi.businessservice;
+package com.washi.businessservice.tests;
 
 import com.washi.businessservice.entity.Order;
 import com.washi.businessservice.model.User;
@@ -10,19 +10,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.List;
 
 @SpringBootTest
-public class VisualizarInformacionMiPedido {
+public class VisualizarInformacionPedidos {
     @Autowired
     private WebClient.Builder webClientBuilder;
 
     Order order;
 
+    List<Order> orders;
 
-    // Scenario: El washer desea visualizar un pedido que adquirio
+    // Scenario: El dueño desea visualizar información detallada de un pedido
     @Test
-    void visualizarInformacionMiPedido() {
+    void visualizarInformacionPedidos() {
 
         // Given: Desea visualizar un pedido
-        givenDeseaVisualizarUnPedido();
+        givenDeseaVisualizarSusPedidos();
         // When : Ingresa al pedido
         whenIngresaAlPedido();
         // Then : Puede visualizar el pedido
@@ -30,24 +31,25 @@ public class VisualizarInformacionMiPedido {
 
     }
 
-    private void givenDeseaVisualizarUnPedido() {
-        User user = User.builder().name("Felipe").build();
+    private void givenDeseaVisualizarSusPedidos() {
+        User user = User.builder().id(3L).name("Jose").build();
         System.out.println(user);
     }
 
     private void whenIngresaAlPedido() {
-        long idL = 1;
-        String id = String.valueOf(idL);
-        Order orderResponse = webClientBuilder.build()
+        List<Order> ordersResponse = webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8979/business/order/"+id)
+                .uri("http://localhost:8979/business/order")
                 .retrieve()
-                .bodyToMono(Order.class)
+                .bodyToFlux(Order.class)
+                .collectList()
                 .block();
-        order=orderResponse;
+        orders=ordersResponse;
     }
 
     private void thenPuedeVisualizarElPedido() {
-        System.out.println(order);
+        System.out.println(orders);
     }
+
+
 }

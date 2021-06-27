@@ -29,10 +29,6 @@ class SecurityServiceApplicationTests {
     @Test
     void newUser() {
         User user = new User();
-        user.setEmail("pruebatestin3g@gmail.com");
-        user.setNumberUser("000069");
-        user.setPassword("contra");
-        user.setState("CREATED");
         User userResponse = webClientBuilder.build()
                 .post()
                 .uri("http://localhost:8909/security/users")
@@ -61,10 +57,6 @@ class SecurityServiceApplicationTests {
         long idL = 1;
         String id = String.valueOf(idL);
         User user = new User();
-        user.setEmail("pruebatesting@gmail.com");
-        user.setNumberUser("000420");
-        user.setPassword("contra");
-        user.setState("CREATED");
         User userResponse = webClientBuilder.build()
                 .put()
                 .uri("http://localhost:8909/security/users/"+id)

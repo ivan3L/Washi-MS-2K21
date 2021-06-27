@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/subnpay/userPaymentMethods")
-@Api(tags = "Security")
+@Api(tags = "Subnpay")
 public class UserPaymentMethodController {
     @Autowired
     UserPaymentMethodService userPaymentMethodService;

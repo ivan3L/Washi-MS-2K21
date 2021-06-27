@@ -22,7 +22,7 @@ class SecurityServiceApplicationTests {
     void paymentMethods() {
         List<UserPaymentMethod> userPaymentMethods = webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8399/subnpay/paymentmethods")
+                .uri("http://localhost:8399/subnpay/userPaymentMethods")
                 .retrieve()
                 .bodyToFlux(UserPaymentMethod.class)
                 .collectList()
@@ -35,7 +35,7 @@ class SecurityServiceApplicationTests {
         UserPaymentMethod userPaymentMethod = new UserPaymentMethod();
         UserPaymentMethod userPaymentMethodResponse = webClientBuilder.build()
                 .post()
-                .uri("http://localhost:8399/subnpay/paymentmethods")
+                .uri("http://localhost:8399/subnpay/userPaymentMethods")
                 .bodyValue(userPaymentMethod)
                 .retrieve()
                 .bodyToMono(UserPaymentMethod.class)
@@ -49,7 +49,7 @@ class SecurityServiceApplicationTests {
         String id = String.valueOf(idL);
         UserPaymentMethod userPaymentMethod = webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8399/subnpay/paymentmethods/"+id)
+                .uri("http://localhost:8399/subnpay/userPaymentMethods/"+id)
                 .retrieve()
                 .bodyToMono(UserPaymentMethod.class)
                 .block();
@@ -63,7 +63,7 @@ class SecurityServiceApplicationTests {
         UserPaymentMethod userPaymentMethod = new UserPaymentMethod();
         UserPaymentMethod userPaymentMethodResponse = webClientBuilder.build()
                 .put()
-                .uri("http://localhost:8399/subnpay/paymentmethods/"+id)
+                .uri("http://localhost:8399/subnpay/userPaymentMethods/"+id)
                 .bodyValue(userPaymentMethod)
                 .retrieve()
                 .bodyToMono(UserPaymentMethod.class)

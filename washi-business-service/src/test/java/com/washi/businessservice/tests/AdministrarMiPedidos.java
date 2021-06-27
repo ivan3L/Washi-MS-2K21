@@ -1,4 +1,4 @@
-package com.washi.businessservice;
+package com.washi.businessservice.tests;
 
 import com.washi.businessservice.entity.Order;
 import com.washi.businessservice.model.User;

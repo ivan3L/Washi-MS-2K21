@@ -1,6 +1,5 @@
-package com.washi.subnpayservice;
+package com.washi.subnpayservice.tests;
 
-import com.washi.subnpayservice.entity.Subscription;
 import com.washi.subnpayservice.entity.UserPaymentMethod;
 import com.washi.subnpayservice.model.User;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ public class UtilizarMetodoDePago {
     private void whenEscogeSuListaDeMetodosDePago() {
         List<UserPaymentMethod> userPaymentMethodsResponse = webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8399/subnpay/paymentmethods")
+                .uri("http://localhost:8399/subnpay/userPaymentMethods")
                 .retrieve()
                 .bodyToFlux(UserPaymentMethod.class)
                 .collectList()
@@ -73,6 +72,15 @@ public class UtilizarMetodoDePago {
     }
 
     private void whenLlenaLaNuevaInformacion() {
+        userPaymentMethod.setUser(user);
+        UserPaymentMethod userPaymentMethodResponse = webClientBuilder.build()
+                .post()
+                .uri("http://localhost:8399/subnpay/userPaymentMethods")
+                .bodyValue(userPaymentMethod)
+                .retrieve()
+                .bodyToMono(UserPaymentMethod.class)
+                .block();
+        userPaymentMethod=userPaymentMethodResponse;
     }
 
     private void thenSeIngresaSuNuevoMetodoCorrectamente() {
@@ -98,35 +106,19 @@ public class UtilizarMetodoDePago {
     }
 
     private void whenActualizaLaInformacion() {
+        long idL = 1;
+        String id = String.valueOf(idL);
+        userPaymentMethod.setUser(user);
+        UserPaymentMethod userPaymentMethodResponse = webClientBuilder.build()
+                .put()
+                .uri("http://localhost:8399/subnpay/userPaymentMethods/"+id)
+                .bodyValue(userPaymentMethod)
+                .retrieve()
+                .bodyToMono(UserPaymentMethod.class)
+                .block();
     }
 
     private void thenSeActualizaSuMetodoDePago() {
-        System.out.println(userPaymentMethod);
-    }
-
-
-    //Scenario: El washer desea eliminar uno de sus métodos de pago
-    @Test
-    void eliminarMetodoDePago() {
-        //Given: El washer desea eliminar método de pago
-        givenDeseaEliminarMetodoDePago();
-
-        //When:  Selecciona método a eliminar
-        whenSeleccionaMetodoAEliminar();
-
-        //Then: Se elimina correctamente
-        thenSeEliminaCorrectamente();
-    }
-
-    private void givenDeseaEliminarMetodoDePago() {
-        user = User.builder().name("Felipe").build();
-        System.out.println(user);
-    }
-
-    private void whenSeleccionaMetodoAEliminar() {
-    }
-
-    private void thenSeEliminaCorrectamente() {
         System.out.println(userPaymentMethod);
     }
 

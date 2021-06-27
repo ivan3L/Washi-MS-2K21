@@ -1,4 +1,4 @@
-package com.washi.businessservice;
+package com.washi.businessservice.tests;
 
 import com.washi.businessservice.entity.Order;
 import com.washi.businessservice.model.User;
@@ -10,33 +10,32 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.List;
 
 @SpringBootTest
-public class VisualizarInformacionPedidos {
+public class VisualizarHistorialPedidos {
+
     @Autowired
     private WebClient.Builder webClientBuilder;
 
-    Order order;
-
     List<Order> orders;
 
-    // Scenario: El dueño desea visualizar información detallada de un pedido
+    // Scenario: El washer desea visualizar su historial de pedidos
     @Test
-    void visualizarInformacionPedidos() {
+    void visualizarHistorialPedidos() {
 
-        // Given: Desea visualizar un pedido
-        givenDeseaVisualizarSusPedidos();
-        // When : Ingresa al pedido
-        whenIngresaAlPedido();
-        // Then : Puede visualizar el pedido
-        thenPuedeVisualizarElPedido();
+        // Given: Desea visualizar historial de pedidos
+        givenDeseaVisualizarSuHistorialPedidos();
+        // When : Ingresa a la sección de pedidos
+        whenIngresaASeccionDePedidos();
+        // Then : Puede visualizar los pedidos
+        thenPuedeVisualizarLosPedidos();
 
     }
 
-    private void givenDeseaVisualizarSusPedidos() {
+    private void givenDeseaVisualizarSuHistorialPedidos() {
         User user = User.builder().id(3L).name("Jose").build();
         System.out.println(user);
     }
 
-    private void whenIngresaAlPedido() {
+    private void whenIngresaASeccionDePedidos() {
         List<Order> ordersResponse = webClientBuilder.build()
                 .get()
                 .uri("http://localhost:8979/business/order")
@@ -47,9 +46,7 @@ public class VisualizarInformacionPedidos {
         orders=ordersResponse;
     }
 
-    private void thenPuedeVisualizarElPedido() {
+    private void thenPuedeVisualizarLosPedidos() {
         System.out.println(orders);
     }
-
-
 }
